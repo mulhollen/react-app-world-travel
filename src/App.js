@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Title from './Title.js';
 import TravelLinks from './TravelLinks.js';
+import TravelGuides from './Guides.js';
 import travel from './travel_React.jpg';
 import './App.css';
+
 
 class App extends Component {
   render() {
@@ -12,8 +14,8 @@ class App extends Component {
           <Title title="World Wide Travel, inc." />
         </header>
         <img src={travel} className="App-logo" alt="logo" />
+        <TravelGuides />
         <footer>
-
           < TravelLinks url="http://www.thisiscleveland.com/contact/publications/visitors-guide/"
             destination="Cleveland" />
           < TravelLinks url="https://washington.org/"
