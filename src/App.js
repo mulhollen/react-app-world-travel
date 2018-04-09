@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Title from './Title.js';
 import TravelLinks from './TravelLinks.js';
 import TravelGuides from './Guides.js';
+import Weather from './Weather.js';
 import travel from './travel_React.jpg';
 import './App.css';
 
@@ -12,6 +13,7 @@ class App extends Component {
       <div className="App">
         <header>
           <Title title="World Wide Travel, inc." />
+          <Weather />
         </header>
         <img src={travel} className="App-logo" alt="logo" />
         <TravelGuides />
