@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
+let zipCode = 37216
 
 
 class Weather extends Component {
-
     constructor(props) {
         super(props);
 
@@ -19,9 +19,21 @@ class Weather extends Component {
         this.getWeather();
     }
 
+
+    getAnotherClicked() {
+        console.log("get another");
+        zipCode = document.getElementById("zip").value;
+        console.log("zipcode", zipCode);        
+        this.setState({
+            weatherLoaded: false,
+            objResult: {},
+            error: null
+        }, this.getWeather());
+    }
+
+
     getWeather(){
         console.log("get Weather");
-        let zipCode = "37216"
         fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=ea4decbd9523a788936a0d1c56cb5751&units=imperial`)
             .then(res => res.json())
             .then(
@@ -55,6 +67,8 @@ class Weather extends Component {
             return (
                 <div>
                     <h5>Current Weather for {objResult.name}: {objResult.main.temp}&deg;F</h5>
+                    <input id="zip" type="text"></input>
+                    <button onClick={this.getAnotherClicked.bind(this)}>Get Weather</button>
                 </div>
             )
         }
