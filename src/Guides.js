@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './App.css'
 
 const guidesInfo = [{
@@ -40,19 +41,49 @@ const guidesInfo = [{
 }]
 
 class Guides extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
     render() {
         const listItems = guidesInfo.map((link) =>
             <div>
-                <h3>{link.title}</h3>
-                <h5>{link.price}</h5>
-                <p>{link.type}</p>
+                <div className="card m-5 p-5">
+                    <div className="card-body">
+                        <h5 className="card-title">{link.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">${link.price}</h6>
+                        <p class="card-text">{link.type}</p>
+                        <Button color="danger" onClick={this.toggle}>Learn More</Button>
+                    </div>
+                </div>
+                <div>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                        <ModalBody>
+                            <p>{link.title}</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </div>
             </div>
+    
         );
         return (
-            <div>
-                <ul>
-                    {listItems}
-                </ul>
+            <div className="d-flex flex-row flex-wrap justify-content-center">
+                {listItems}
             </div>
         )
     } 
